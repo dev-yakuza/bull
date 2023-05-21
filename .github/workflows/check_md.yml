@@ -1,0 +1,18 @@
+name: Check markdown by Remark
+on:
+  pull_request:
+    paths:
+      - '**.md'
+      - '**.markdown'
+jobs:
+  check:
+    name: Check markdown
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3.6.0
+        with:
+          node-version: '20'
+      - run: npm install -g npm@latest
+      - run: npm install remark-cli remark-lint remark-preset-lint-sider remark-preset-lint-consistent remark-preset-lint-recommended
+      - run: npx remark . --quiet --frail

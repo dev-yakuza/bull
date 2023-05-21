@@ -1,0 +1,4 @@
+{
+  "words": ["pubspec", "Lefthook", "yakuza"],
+  "ignorePaths": ["LICENSE", "pubspec.yaml"]
+}

@@ -1,0 +1,10 @@
+pre-commit:
+  parallel: true
+  commands:
+    pretty:
+      glob: '*.dart'
+      run: dart format {staged_files} && git add {staged_files}
+    linter:
+      run: dart analyze
+    tests:
+      run: dart test

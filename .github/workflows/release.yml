@@ -1,0 +1,51 @@
+name: Update Changelog
+
+on:
+  release:
+    types:
+      - released
+
+jobs:
+  update:
+    name: Update Changelog
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.release.target_commitish }}
+
+      - name: Update Changelog
+        uses: stefanzweifel/changelog-updater-action@v1
+        with:
+          latest-version: ${{ github.event.release.name }}
+          release-notes: ${{ github.event.release.body }}
+
+      - name: Commit updated Changelog
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: ${{ github.event.release.target_commitish }}
+          commit_message: 'docs: Update changelog'
+          file_pattern: CHANGELOG.md
+
+      - uses: dart-lang/setup-dart@v1
+      - name: Install dependencies
+        run: dart pub get
+      - name: Get release version
+        run: |
+          VERSION=${{ github.event.release.tag_name }}
+          echo "VERSION=${VERSION:1}" >> $GITHUB_ENV
+      - name: Update version
+        run: dart run bull pub_version --version=${VERSION}
+      - name: Commit updated pubspec
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: ${{ github.event.release.target_commitish }}
+          commit_message: 'chore: Update version for release'
+          file_pattern: pubspec.yaml
+      - name: Publish
+        run: dart pub publish --force

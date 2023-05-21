@@ -1,0 +1,29 @@
+name: Check and test the source code
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  check_typo:
+    name: Check typo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3.6.0
+        with:
+          node-version: '20'
+      - run: npm install -g npm@latest
+      - run: npm install cspell
+      - run: npx cspell '**' --gitignore --no-progress
+  test:
+    name: Check the source code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1
+      - name: Install packages
+        run: dart pub get
+      - name: Linter
+        run: dart analyze
+      - name: Test
+        run: dart test
