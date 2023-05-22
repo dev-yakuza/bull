@@ -42,8 +42,7 @@ jobs:
         with:
           commit_message: 'docs: Update changelog'
           file_pattern: CHANGELOG.md
-          branch: ${{ github.ref_name }}
-          push_options: '--force'
+          branch: main
 
       - uses: dart-lang/setup-dart@v1
       - name: Install dependencies
@@ -57,8 +56,12 @@ jobs:
         with:
           commit_message: 'chore: Update version for release'
           file_pattern: pubspec.yaml
-          branch: ${{ github.ref_name }}
-          push_options: '--force'
+          branch: main
+
+      - name: Update Git tag
+        run: |
+          git tag ${{ github.ref_name }} -f
+          git push origin ${{ github.ref_name }} -f
 
       - uses: release-drafter/release-drafter@v5
         with:
