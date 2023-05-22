@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.3 - 2023-05-22
+
+- No changes
+
 ## 0.0.2 - 2023-05-22
 
 ### 📃 Documents
