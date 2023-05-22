@@ -28,7 +28,6 @@ jobs:
           name: ${{ steps.semver.outputs.version }}
           version: ${{ steps.semver.outputs.version }}
         env:
-          # https://github.com/stefanzweifel/changelog-updater-action/discussions/30
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update Changelog
@@ -70,7 +69,6 @@ jobs:
           version: ${{ steps.semver.outputs.version }}
           publish: true
         env:
-          # https://github.com/stefanzweifel/changelog-updater-action/discussions/30
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish
