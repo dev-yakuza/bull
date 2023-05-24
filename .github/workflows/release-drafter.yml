@@ -24,7 +24,7 @@ jobs:
       - uses: release-drafter/release-drafter@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: danielchabr/pr-labels-checker@v3.2
+      - uses: danielchabr/pr-labels-checker@v3.3
         with:
           hasSome: breaking change,feature,bug,style,refactor,test,chore,docs,ci,dependencies
           githubToken: ${{ secrets.GITHUB_TOKEN }}
