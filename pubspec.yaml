@@ -1,6 +1,6 @@
 name: bull
 description: A collection of convenient and useful Command-Line interfaces for development.
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/dev-yakuza/bull
 repository: https://github.com/dev-yakuza/bull
 
