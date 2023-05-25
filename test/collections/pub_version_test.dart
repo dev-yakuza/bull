@@ -21,63 +21,88 @@ void main() {
 
   group('Update', () {
     test('When version is major, update major version and reset others', () {
-      expect(File(tempFile).readAsStringSync(), 'version: 2.5.7');
-      bull.main(
-        ['pub_version', '--version', 'major', '--file-path', tempFile],
-      );
-      expect(File(tempFile).readAsStringSync(), 'version: 3.0.0');
-      bull.main(
-        ['pub_version', '--version', 'major', '--file-path', tempFile],
-      );
-      expect(File(tempFile).readAsStringSync(), 'version: 4.0.0');
+      runWithPrint((logs) async {
+        expect(File(tempFile).readAsStringSync(), 'version: 2.5.7');
+        await bull.main(
+          ['pub_version', '--version', 'major', '--file-path', tempFile],
+        );
+        expect(File(tempFile).readAsStringSync(), 'version: 3.0.0');
+        expect(logs[0], 'Update the version from 2.5.7 to 3.0.0...');
+
+        await bull.main(
+          ['pub_version', '--version', 'major', '--file-path', tempFile],
+        );
+        expect(File(tempFile).readAsStringSync(), 'version: 4.0.0');
+        expect(logs[1], 'Update the version from 3.0.0 to 4.0.0...');
+      });
     });
 
     test('When version is minor, update minor version and reset patch', () {
-      expect(File(tempFile).readAsStringSync(), 'version: 2.5.7');
-      bull.main(
-        ['pub_version', '--version', 'minor', '--file-path', tempFile],
-      );
-      expect(File(tempFile).readAsStringSync(), 'version: 2.6.0');
-      bull.main(
-        ['pub_version', '--version', 'minor', '--file-path', tempFile],
-      );
-      expect(File(tempFile).readAsStringSync(), 'version: 2.7.0');
+      runWithPrint((logs) async {
+        expect(File(tempFile).readAsStringSync(), 'version: 2.5.7');
+        await bull.main(
+          ['pub_version', '--version', 'minor', '--file-path', tempFile],
+        );
+        expect(File(tempFile).readAsStringSync(), 'version: 2.6.0');
+        expect(logs[0], 'Update the version from 2.5.7 to 2.6.0...');
+
+        await bull.main(
+          ['pub_version', '--version', 'minor', '--file-path', tempFile],
+        );
+        expect(File(tempFile).readAsStringSync(), 'version: 2.7.0');
+        expect(logs[1], 'Update the version from 2.6.0 to 2.7.0...');
+      });
     });
 
     test('When version is patch, update patch version and reset build', () {
-      expect(File(tempFile).readAsStringSync(), 'version: 2.5.7');
-      bull.main(
-        ['pub_version', '--version', 'patch', '--file-path', tempFile],
-      );
-      expect(File(tempFile).readAsStringSync(), 'version: 2.5.8');
-      bull.main(
-        ['pub_version', '--version', 'patch', '--file-path', tempFile],
-      );
-      expect(File(tempFile).readAsStringSync(), 'version: 2.5.9');
+      runWithPrint((logs) async {
+        expect(File(tempFile).readAsStringSync(), 'version: 2.5.7');
+        await bull.main(
+          ['pub_version', '--version', 'patch', '--file-path', tempFile],
+        );
+        expect(File(tempFile).readAsStringSync(), 'version: 2.5.8');
+        expect(logs[0], 'Update the version from 2.5.7 to 2.5.8...');
+
+        await bull.main(
+          ['pub_version', '--version', 'patch', '--file-path', tempFile],
+        );
+        expect(File(tempFile).readAsStringSync(), 'version: 2.5.9');
+        expect(logs[1], 'Update the version from 2.5.8 to 2.5.9...');
+      });
     });
 
     test('When version is build, update build version', () {
-      expect(File(tempFile).readAsStringSync(), 'version: 2.5.7');
-      bull.main(
-        ['pub_version', '--version', 'build', '--file-path', tempFile],
-      );
-      expect(File(tempFile).readAsStringSync(), 'version: 2.5.7+1');
-      bull.main(
-        ['pub_version', '--version', 'build', '--file-path', tempFile],
-      );
-      expect(File(tempFile).readAsStringSync(), 'version: 2.5.7+2');
+      runWithPrint((logs) async {
+        expect(File(tempFile).readAsStringSync(), 'version: 2.5.7');
+        await bull.main(
+          ['pub_version', '--version', 'build', '--file-path', tempFile],
+        );
+        expect(File(tempFile).readAsStringSync(), 'version: 2.5.7+1');
+        expect(logs[0], 'Update the version from 2.5.7 to 2.5.7+1...');
+
+        await bull.main(
+          ['pub_version', '--version', 'build', '--file-path', tempFile],
+        );
+        expect(File(tempFile).readAsStringSync(), 'version: 2.5.7+2');
+        expect(logs[1], 'Update the version from 2.5.7+1 to 2.5.7+2...');
+      });
     });
 
     test('When version is specific version, update version same as it', () {
-      expect(File(tempFile).readAsStringSync(), 'version: 2.5.7');
-      bull.main(
-        ['pub_version', '--version', '1.0.0', '--file-path', tempFile],
-      );
-      expect(File(tempFile).readAsStringSync(), 'version: 1.0.0');
-      bull.main(
-        ['pub_version', '--version', '2.7.7-dev.4', '--file-path', tempFile],
-      );
-      expect(File(tempFile).readAsStringSync(), 'version: 2.7.7-dev.4');
+      runWithPrint((logs) async {
+        expect(File(tempFile).readAsStringSync(), 'version: 2.5.7');
+        await bull.main(
+          ['pub_version', '--version', '1.0.0', '--file-path', tempFile],
+        );
+        expect(File(tempFile).readAsStringSync(), 'version: 1.0.0');
+        expect(logs[0], 'Update the version from 2.5.7 to 1.0.0...');
+
+        await bull.main(
+          ['pub_version', '--version', '2.7.7-dev.4', '--file-path', tempFile],
+        );
+        expect(File(tempFile).readAsStringSync(), 'version: 2.7.7-dev.4');
+        expect(logs[1], 'Update the version from 1.0.0 to 2.7.7-dev.4...');
+      });
     });
 
     group('Error occurs', () {
