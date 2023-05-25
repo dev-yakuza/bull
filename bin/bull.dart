@@ -2,13 +2,12 @@ import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:bull/collections/pub_version.dart';
 
-void main(List<String> arguments) {
-  NoneTraceCommandRunner(
+Future<void> main(List<String> arguments) async {
+  final cmd = NoneTraceCommandRunner(
     "bull",
     "A collection of convenient and useful Command-Line interfaces for development.",
-  )
-    ..addCommand(PubVersion())
-    ..run(arguments);
+  )..addCommand(PubVersion());
+  await cmd.run(arguments);
 }
 
 class NoneTraceCommandRunner extends CommandRunner {
