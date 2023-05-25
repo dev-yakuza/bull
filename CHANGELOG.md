@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.0.5 - 2023-05-25
+
+### 🐛 Bug Fixes
+
+- fix: Use dynamic to fix wrong subtype error @dev-yakuza (#12)
+
+### 🔬 Others
+
+- refactor: Use bin code instead of src code @dev-yakuza (#11)
+
 ## 0.0.4 - 2023-05-24
 
 ### 🧩 Dependency Updates
