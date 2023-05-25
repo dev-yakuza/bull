@@ -14,7 +14,7 @@ class NoneTraceCommandRunner extends CommandRunner {
   NoneTraceCommandRunner(super.executableName, super.description);
 
   @override
-  Future<int> runCommand(ArgResults topLevelResults) async {
+  Future<dynamic> runCommand(ArgResults topLevelResults) async {
     try {
       return await super.runCommand(topLevelResults);
     } catch (e) {
