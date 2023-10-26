@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.0.6 - 2023-10-26
+
+### 🧩 Dependency Updates
+
+<details>
+<summary>6 changes</summary>
+- chore: Change release tag and note version name @dev-yakuza (#21)
+- chore: Bump actions/setup-node from 3.6.0 to 3.8.1 @dependabot (#16)
+- chore: Bump actions/checkout from 3 to 4 @dependabot (#18)
+- chore: Update package dependencies @dev-yakuza (#17)
+- chore: Update dependencies @dev-yakuza (#14)
+- chore: Update dependencies @dev-yakuza (#13)
+
+</details>
 ## 0.0.5 - 2023-05-25
 
 ### 🐛 Bug Fixes
