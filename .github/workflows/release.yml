@@ -24,9 +24,9 @@ jobs:
       - uses: release-drafter/release-drafter@v5
         id: target_release_notes
         with:
-          tag: ${{ steps.semver.outputs.version }}
-          name: ${{ steps.semver.outputs.version }}
-          version: ${{ steps.semver.outputs.version }}
+          tag: v${{ steps.semver.outputs.version }}
+          name: v${{ steps.semver.outputs.version }}
+          version: v${{ steps.semver.outputs.version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -64,9 +64,9 @@ jobs:
 
       - uses: release-drafter/release-drafter@v5
         with:
-          tag: ${{ steps.semver.outputs.version }}
-          name: ${{ steps.semver.outputs.version }}
-          version: ${{ steps.semver.outputs.version }}
+          tag: v${{ steps.semver.outputs.version }}
+          name: v${{ steps.semver.outputs.version }}
+          version: v${{ steps.semver.outputs.version }}
           publish: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
