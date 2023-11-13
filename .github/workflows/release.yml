@@ -37,7 +37,7 @@ jobs:
           release-notes: ${{ steps.target_release_notes.outputs.body }}
 
       - name: Commit updated Changelog
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'docs: Update changelog'
           file_pattern: CHANGELOG.md
@@ -51,7 +51,7 @@ jobs:
         run: dart run bull pub_version --version=${{ steps.semver.outputs.version }}
 
       - name: Commit updated pubspec
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'chore: Update version for release'
           file_pattern: pubspec.yaml
